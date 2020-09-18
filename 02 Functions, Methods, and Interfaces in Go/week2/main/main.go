@@ -2,49 +2,28 @@ package main
 
 import "fmt"
 
-type Animal struct {
-	food       string
-	locomotion string
-	noise      string
-}
-
-func (a Animal) Eat() {
-	fmt.Println(a.food)
-}
-
-func (a Animal) Speak() {
-	fmt.Println(a.noise)
-}
-
-func (a Animal) Move() {
-	fmt.Println(a.locomotion)
-}
-
 func main() {
-	for {
-		var name, action string
-		fmt.Scan(&name)
-		fmt.Scan(&action)
-		var a Animal
-		switch name {
-		case "cow":
-			a = Animal{"grass", "walk", "moo"}
-		case "bird":
-			a = Animal{"worms", "fly", "peep"}
-		case "snake":
-			a = Animal{"mice", "slither", "hsss"}
-		}
+	var a, v0, s0, t float64
 
-		switch action {
-		case "eat":
-			a.Eat()
-			continue
-		case "move":
-			a.Move()
-			continue
-		case "speak":
-			a.Speak()
-			continue
-		}
+	fmt.Print("Enter acceleration: ")
+	fmt.Scan(&a)
+	fmt.Print("Enter initial velocity: ")
+	fmt.Scan(&v0)
+	fmt.Print("Enter initial displacement: ")
+	fmt.Scan(&s0)
+	fmt.Print("Enter time: ")
+	fmt.Scan(&t)
+
+	fn := GenDisplaceFn(a, v0, s0)
+
+	fmt.Println(fn(t))
+}
+
+func GenDisplaceFn(a, v0, s0 float64) func(float64) float64 {
+
+	fn := func(t float64) float64 {
+		return ((1 / 2) * a * (t * t)) + (v0 * t) + s0
 	}
+
+	return fn
 }

@@ -3,27 +3,31 @@ package main
 import "fmt"
 
 func main() {
-	var a, v0, s0, t float64
+	var arr = make([]int, 0)
 
-	fmt.Print("Enter acceleration: ")
-	fmt.Scan(&a)
-	fmt.Print("Enter initial velocity: ")
-	fmt.Scan(&v0)
-	fmt.Print("Enter initial displacement: ")
-	fmt.Scan(&s0)
-	fmt.Print("Enter time: ")
-	fmt.Scan(&t)
+	var n int
 
-	fn := GenDisplaceFn(a, v0, s0)
+	fmt.Print("Enter length of array: ")
+	fmt.Scan(&n)
 
-	fmt.Println(fn(t))
-}
-
-func GenDisplaceFn(a, v0, s0 float64) func(float64) float64 {
-
-	fn := func(t float64) float64 {
-		return ((1 / 2) * a * (t * t)) + (v0 * t) + s0
+	for i := 0; i < n; i++ {
+		var number int
+		fmt.Scan(&number)
+		arr = append(arr, number)
 	}
 
-	return fn
+	for i := 0; i < n; i++ {
+		for j := 0; j < n-1; j++ {
+			if arr[j] > arr[j+1] {
+				swap(arr, j, j+1)
+			}
+		}
+	}
+	fmt.Println(arr)
+}
+
+func swap(sli []int, index1 int, index2 int) {
+	temp := sli[index1]
+	sli[index1] = sli[index2]
+	sli[index2] = temp
 }
