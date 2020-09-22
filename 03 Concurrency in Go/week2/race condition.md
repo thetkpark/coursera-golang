@@ -1,14 +1,26 @@
 ```go
 package main
-import "fmt"
 
-x := 1
-func f1(){
-  x++
+import(
+	"fmt"
+	"time"
+) 
+
+func print(x *int){
+	fmt.Printf("Value of x : %d",*x)
+}
+func increment(x *int){
+	fmt.Printf("Incrementing : ");
+	*x += 1
 }
 
-func f2(){
-  fmt.print(x)
+func main(){
+	var x int = 0;
+	go operate(&x)
+	go print(&x)
+
+	time.Sleep(time.Second)
+    fmt.Println("DONE")
 }
 ```
 
